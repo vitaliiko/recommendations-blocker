@@ -10,7 +10,7 @@ document.addEventListener('scroll', (e) => {
         if (containsSuggestionText) {
             node.remove();
             removedItemsCount++;
-            console.log(`${removedItemsCount} items have been removed`);
+            console.log(`[RecommendationsRemover] ${removedItemsCount} items have been removed`);
         } 
     }
 });
