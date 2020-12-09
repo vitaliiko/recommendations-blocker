@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "Recommendations blocker",
+  "version": "0.1.1",
+  "icons": {
+    "32": "images/facebook.png"
+  },
+  "browser_action": {
+    "default_icon": {                    
+      "32": "images/facebook.png"
+    },
+    "default_title": "Recommendations blocker",
+    "background": {
+      "persistent": false
+    }
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "http://*/*", 
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/main.js",
+      "scripts/recommendations_remover.js"
+    ],
+    "persistent": false
+  }
+}
