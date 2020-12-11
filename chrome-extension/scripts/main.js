@@ -4,12 +4,13 @@ const ACTIVE_TAB_QUERY = {'active': true, 'lastFocusedWindow': true, 'currentWin
 let REMOVED_ITEMS_COUNT = 0;
 
 const run = (tabInfo) => {
+    setIcon('OTHER_PAGE');
     getCurrentUrl(tabInfo).then(currentTabInfo => {
         if (currentTabInfo.url && currentTabInfo.url.includes('facebook')) {
             setIcon('FB_PAGE');
-            console.log('[RecommendationsRemover] Facebook page detected. Try to remove suggestions')
+            console.log('[RecommendationsBlocker] Facebook page detected. Try to remove suggestions')
             chrome.tabs.executeScript({
-                file: 'scripts/recommendations_remover.js'
+                file: 'scripts/facebook_suggestions_remover.js'
             });
         } else {
             setIcon('OTHER_PAGE');
@@ -22,7 +23,7 @@ const getCurrentUrl = tabInfo => {
         try {
             let pageUrl;
             chrome.tabs.query(ACTIVE_TAB_QUERY, tabs => {
-                if (tabs.length == 0) {
+                if (tabs.length === 0 || tabs[0] === undefined) {
                     resolve('');
                 }
                 resolve({ url: tabs[0].url, id: tabs[0].id });
@@ -46,3 +47,4 @@ const setIcon = (status) => {
 }
 
 chrome.tabs.onActivated.addListener(run);
+chrome.tabs.onUpdated.addListener(run);
