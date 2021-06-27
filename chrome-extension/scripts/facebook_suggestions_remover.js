@@ -38,3 +38,10 @@ document.addEventListener('scroll', (e) => {
         console.log(`[RecommendationsBlocker] ${removedItemsCount} items have been removed`);   
     }
 });
+
+const FACEBOOK_BASE_URL = 'https://www.facebook.com/';
+const MOST_RECENT_URL_SEARCH = '?sk=h_chr';
+if (!document.location.search.startsWith(MOST_RECENT_URL_SEARCH)) {
+    console.log("[RecommendationsBlocker] Reload the page to show the most recent feed");
+    location.replace(FACEBOOK_BASE_URL + MOST_RECENT_URL_SEARCH)
+}
