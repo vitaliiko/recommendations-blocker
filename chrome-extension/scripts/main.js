@@ -6,7 +6,7 @@ let REMOVED_ITEMS_COUNT = 0;
 const run = (tabInfo) => {
     setIcon('OTHER_PAGE');
     getCurrentUrl(tabInfo).then(currentTabInfo => {
-        if (currentTabInfo.url && currentTabInfo.url.includes('facebook')) {
+        if (currentTabInfo && currentTabInfo.url && currentTabInfo.url.includes('facebook')) {
             setIcon('FB_PAGE');
             console.log('[RecommendationsBlocker] Facebook page detected. Try to remove suggestions')
             chrome.tabs.executeScript({
@@ -25,6 +25,7 @@ const getCurrentUrl = tabInfo => {
             chrome.tabs.query(ACTIVE_TAB_QUERY, tabs => {
                 if (tabs.length === 0 || tabs[0] === undefined) {
                     resolve('');
+                    return;
                 }
                 resolve({ url: tabs[0].url, id: tabs[0].id });
             });
