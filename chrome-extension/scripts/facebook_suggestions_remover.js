@@ -41,7 +41,7 @@ document.addEventListener('scroll', (e) => {
 
 const FACEBOOK_BASE_URL = 'https://www.facebook.com/';
 const MOST_RECENT_URL_SEARCH = '?sk=h_chr';
-if (!document.location.search.startsWith(MOST_RECENT_URL_SEARCH)) {
+if (!document.location.search.startsWith(MOST_RECENT_URL_SEARCH) && document.location.pathname === '/') {
     console.log("[RecommendationsBlocker] Reload the page to show the most recent feed");
     location.replace(FACEBOOK_BASE_URL + MOST_RECENT_URL_SEARCH)
 }
